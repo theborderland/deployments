@@ -1,0 +1,19 @@
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: azurefile
+provisioner: kubernetes.io/azure-file
+mountOptions:
+  - dir_mode=0777
+  - file_mode=0555
+  - uid=1000
+  - gid=1000
+  - mfsymlinks
+  - nobrl
+  - cache=none
+reclaimPolicy: Retain
+allowVolumeExpansion: true
+parameters:
+  skuName: Standard_LRS
+  location: westeurope
+
