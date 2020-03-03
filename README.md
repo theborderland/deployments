@@ -8,7 +8,10 @@
 
 ## Accessing our cluster
 
-link to `az` commands here
+```bash
+# az login
+# az aks get-credentials --resource-group rg-kubernetes-prod --name k8s-main-prod
+```
 
 ## Example usage
 
