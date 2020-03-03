@@ -1,8 +1,8 @@
-let version = "9.0.0"
+let version = "67006f9c3af0936ea9182bbc065c9c28f4464f71"
 
 let name = "keycloak"
 
-let image = "jboss/keycloak"
+let image = "krav/borderland-account"
 
 let kubernetes =
       https://raw.githubusercontent.com/dhall-lang/dhall-kubernetes/master/package.dhall sha256:d9eac5668d5ed9cb3364c0a39721d4694e4247dad16d8a82827e4619ee1d6188
