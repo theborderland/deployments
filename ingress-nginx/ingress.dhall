@@ -8,8 +8,10 @@ let map = Prelude.List.map
 let Service = { name : Text, host : Text }
 
 let services =
-      [ { name = "survey", host = "survey.theborderland.se" }
-      , { name = "pretix", host = "pretix-new.theborderland.se" }
+      [ { name = "survey",   host = "survey.theborderland.se" }
+      , { name = "pretix",   host = "pretix-new.theborderland.se" }
+      , { name = "keycloak", host = "account.theborderland.se" }
+      , { name = "pretix",   host = "memberships.theborderland.se" }
       ]
 
 let makeTLS

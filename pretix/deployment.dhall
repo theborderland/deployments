@@ -1,11 +1,10 @@
--- TODO fix weird ass storage
 -- TODO test email with SES, or define new SMTP provider
 
 let name = "pretix"
 
 let image = "krav/pretix"
 
-let version = "a14c373315932e8113c2d08a593f25976862ab6c"
+let version = "52c6e1edc7cd5f5aecf85a0b4afdfd0057296fc6"
 
 let kubernetes =
       https://raw.githubusercontent.com/dhall-lang/dhall-kubernetes/master/package.dhall sha256:d9eac5668d5ed9cb3364c0a39721d4694e4247dad16d8a82827e4619ee1d6188
@@ -13,7 +12,7 @@ let kubernetes =
 in  kubernetes.Deployment::{
     , metadata = kubernetes.ObjectMeta::{ name = name }
     , spec = Some kubernetes.DeploymentSpec::{
-      , replicas = Some 0
+      , replicas = Some 1
       , selector = kubernetes.LabelSelector::{
         , matchLabels = Some (toMap { app = name })
         }
@@ -46,7 +45,7 @@ in  kubernetes.Deployment::{
                   , mountPath = "/etc/pretix"
                   , readOnly = Some True
                   }
-                , kubernetes.VolumeMount::{ name = "data", mountPath = "/data" }
+                , kubernetes.VolumeMount::{ name = "data", mountPath = "/data", subPath = Some "pretix" }
                 ]
               }
             ]
