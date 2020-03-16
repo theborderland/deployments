@@ -3,5 +3,9 @@ let k8s =
 
 in  { apiVersion = "v1"
     , kind = "List"
-    , items = [ k8s.Deployment ./deployment.dhall, k8s.Service ./service.dhall ]
+    , items =
+      [ k8s.Deployment ./deployment.dhall
+      , k8s.Service ./service.dhall
+      , k8s.CronJob ./cronjob.dhall
+      ]
     }
