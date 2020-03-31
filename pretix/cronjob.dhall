@@ -6,7 +6,7 @@ let name = "pretix-cron"
 let pod = ./pod.dhall
 let image = "krav/pretix"
 
-let version = "52c6e1edc7cd5f5aecf85a0b4afdfd0057296fc6"
+let version = "2f59658dcdfcdcc817eb873921309de689fdcd5d"
 
 let name = "pretix"
 
