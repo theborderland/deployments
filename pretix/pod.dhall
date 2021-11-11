@@ -1,9 +1,9 @@
 let kubernetes =
-      https://raw.githubusercontent.com/dhall-lang/dhall-kubernetes/master/package.dhall sha256:d9eac5668d5ed9cb3364c0a39721d4694e4247dad16d8a82827e4619ee1d6188
+      https://raw.githubusercontent.com/dhall-lang/dhall-kubernetes/master/package.dhall sha256:532e110f424ea8a9f960a13b2ca54779ddcac5d5aa531f86d82f41f8f18d7ef1
 
-let image = "krav/pretix"
+let image = "pretix/standalone"
 
-let version = "2f59658dcdfcdcc817eb873921309de689fdcd5d"
+let version = "stable"
 
 let name = "pretix"
 
@@ -12,10 +12,11 @@ in kubernetes.PodSpec::{
         [ kubernetes.Container::{
           , name = name
           , image = Some "${image}:${version}"
-          , ports = Some [ kubernetes.ContainerPort::{ containerPort = 80 } ]
+          , imagePullPolicy = Some "Always"
+          , ports = Some [ kubernetes.ContainerPort::{ containerPort = +80 } ]
           , resources = Some
-              { limits = Some (toMap { cpu = "2", memory = "4Gi" })
-              , requests = Some (toMap { cpu = "10m", memory = "1Gi" })
+              { limits = Some (toMap { cpu = "2", memory = "6Gi" })
+              , requests = Some (toMap { cpu = "10m", memory = "2Gi" })
               }
           , volumeMounts = Some
             [ kubernetes.VolumeMount::{

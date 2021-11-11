@@ -10,6 +10,7 @@ let Service = { name : Text, host : Text }
 let services =
       [ { name = "survey",   host = "survey.theborderland.se" }
       , { name = "keycloak", host = "account.theborderland.se" }
+      , { name = "pretix",   host = "tickets.kiezburn.org" }
       , { name = "pretix",   host = "memberships.theborderland.se" }
       ]
 
@@ -17,7 +18,7 @@ let makeTLS
     : Service → kubernetes.IngressTLS.Type
     =   λ(service : Service)
       → { hosts = Some [ service.host ]
-        , secretName = Some "${service.name}-certificate"
+        , secretName = Some "${service.host}-certificate"
         }
 
 let makeRule
@@ -28,7 +29,7 @@ let makeRule
             { paths =
               [ { backend =
                     { serviceName = service.name
-                    , servicePort = kubernetes.IntOrString.Int 80
+                    , servicePort = kubernetes.IntOrString.Int +80
                     }
                 , path = None Text
                 }
@@ -70,7 +71,7 @@ let mkIngress
 
         in  kubernetes.Ingress::{
             , metadata = kubernetes.ObjectMeta::{
-              , name = "nginx"
+              , name = Some "nginx"
               , annotations = Some annotations
               }
             , spec = Some spec

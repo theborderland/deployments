@@ -1,25 +1,25 @@
 let kubernetes =
-      https://raw.githubusercontent.com/dhall-lang/dhall-kubernetes/master/package.dhall sha256:d9eac5668d5ed9cb3364c0a39721d4694e4247dad16d8a82827e4619ee1d6188
+      https://raw.githubusercontent.com/dhall-lang/dhall-kubernetes/master/package.dhall sha256:532e110f424ea8a9f960a13b2ca54779ddcac5d5aa531f86d82f41f8f18d7ef1
 
 let name = "pretix-cron"
 
 let pod = ./pod.dhall
-let image = "krav/pretix"
+let image = "pretix/standalone"
 
-let version = "2f59658dcdfcdcc817eb873921309de689fdcd5d"
+let version = "stable"
 
 let name = "pretix"
 
 
 in  kubernetes.CronJob::{
-    , metadata = kubernetes.ObjectMeta::{ name = name }
+    , metadata = kubernetes.ObjectMeta::{ name = Some name }
     , spec = Some kubernetes.CronJobSpec::{
       , jobTemplate = kubernetes.JobTemplateSpec::{
-        , metadata = kubernetes.ObjectMeta::{ name = name }
+        , metadata = Some kubernetes.ObjectMeta::{ name = Some name }
         , spec = Some kubernetes.JobSpec::{
           , template = kubernetes.PodTemplateSpec::{
-            , metadata = kubernetes.ObjectMeta::{
-              , name = name
+            , metadata = Some kubernetes.ObjectMeta::{
+              , name = Some name
               , labels = Some (toMap { app = name })
               }
             , spec = Some

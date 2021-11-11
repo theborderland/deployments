@@ -6,8 +6,9 @@ provisioner: kubernetes.io/azure-file
 mountOptions:
   - dir_mode=0777
   - file_mode=0555
-  - uid=1000
-  - gid=1000
+  - uid=15371
+  - gid=15371
+  - noperm
   - mfsymlinks
   - nobrl
   - cache=none
